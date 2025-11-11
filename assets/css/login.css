@@ -1,0 +1,275 @@
+:root {
+    --primary: #5b6cff;
+    --secondary: #9b6bff;
+    --accent: #13d8ff;
+    --text-light: #f5f7ff;
+    --card-bg: rgba(15, 18, 36, 0.6);
+    --border-color: rgba(255, 255, 255, 0.15);
+    --input-bg: rgba(255, 255, 255, 0.04);
+    --error: #ff5f7d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(circle at 10% 20%, rgba(91, 108, 255, 0.45), transparent 60%),
+        radial-gradient(circle at 90% 10%, rgba(19, 216, 255, 0.35), transparent 55%),
+        radial-gradient(circle at 30% 90%, rgba(155, 107, 255, 0.35), transparent 60%),
+        #070916;
+    color: var(--text-light);
+    overflow: hidden;
+    position: relative;
+}
+
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.7;
+    animation: pulse 16s ease-in-out infinite;
+}
+
+body::before {
+    background: linear-gradient(135deg, rgba(91, 108, 255, 0.6), rgba(155, 107, 255, 0.55));
+    top: -180px;
+    left: -120px;
+}
+
+body::after {
+    background: linear-gradient(135deg, rgba(19, 216, 255, 0.55), rgba(91, 108, 255, 0.55));
+    bottom: -200px;
+    right: -140px;
+    animation-delay: -8s;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+.noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"%3E%3Cfilter id="noise"%3E%3CfeTurbulence baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="400" height="400" filter="url(%23noise)" opacity="0.07"/%3E%3C/svg%3E');
+    mix-blend-mode: screen;
+    z-index: 1;
+}
+
+.login-wrapper {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+}
+
+.login-card {
+    width: min(460px, 100%);
+    padding: 3rem 3.5rem;
+    border-radius: 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(12, 14, 29, 0.55);
+    backdrop-filter: blur(22px);
+    position: relative;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 27px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(91, 108, 255, 0.35), rgba(19, 216, 255, 0.18));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.logo-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 32px;
+    margin: 0 auto 1.75rem;
+    background: linear-gradient(135deg, rgba(91, 108, 255, 0.35), rgba(19, 216, 255, 0.25));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 45px rgba(91, 108, 255, 0.28);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.logo-placeholder img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+
+.logo-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: -120%;
+    background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.55), transparent 80%);
+    animation: shine 4.8s linear infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-50%) rotate(25deg);
+    }
+    100% {
+        transform: translateX(50%) rotate(25deg);
+    }
+}
+
+h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.08em;
+}
+
+.tagline {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: rgba(245, 247, 255, 0.72);
+    font-size: 0.95rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.6rem;
+}
+
+label {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245, 247, 255, 0.7);
+}
+
+input[type='text'],
+input[type='password'] {
+    width: 100%;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--input-bg);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type='text']:focus,
+input[type='password']:focus {
+    outline: none;
+    border-color: rgba(19, 216, 255, 0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(19, 216, 255, 0.25);
+}
+
+.button-wrapper {
+    position: relative;
+}
+
+button[type='submit'] {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--text-light);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 20px 35px rgba(91, 108, 255, 0.35);
+}
+
+button[type='submit']:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 40px rgba(91, 108, 255, 0.45);
+}
+
+button[type='submit']:active {
+    transform: translateY(0);
+}
+
+.glow-border {
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(91, 108, 255, 0.8), rgba(19, 216, 255, 0.8));
+    filter: blur(20px);
+    opacity: 0.6;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+button[type='submit']:hover + .glow-border {
+    opacity: 0.9;
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(245, 247, 255, 0.6);
+    font-size: 0.78rem;
+}
+
+.error-message {
+    background: rgba(255, 95, 125, 0.08);
+    color: var(--error);
+    border: 1px solid rgba(255, 95, 125, 0.35);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.error-message svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 540px) {
+    .login-card {
+        padding: 2.5rem 2rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    .meta-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
